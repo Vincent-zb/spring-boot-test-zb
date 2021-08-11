@@ -24,6 +24,7 @@ public class TestMain {
         WebDriverWait wait = new WebDriverWait(driver, 10, 1);
         wait.until(new ExpectedCondition<WebElement>() {
 
+
             public WebElement apply(WebDriver text) {
                 return text.findElement(By.id("kw"));
             }
@@ -42,7 +43,7 @@ public class TestMain {
         webElement.sendKeys("java selenium");//文本输入
         Thread.sleep(1000);
         webElement.clear();//清除文本
-        Thread.sleep(3000);
+        Thread.sleep(2000);
         webElement.sendKeys("java");
         Thread.sleep(1000);
         //通过元素属性id=su找到百度一下搜索按钮，并对按钮进行点击操作；
