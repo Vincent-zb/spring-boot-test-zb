@@ -15,6 +15,8 @@ import org.apache.http.util.EntityUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -43,11 +45,12 @@ public class test1 {
 
      */
 
+    @Test
     public void jkTest() {
 
         CloseableHttpClient aDefault = HttpClients.createDefault();//1
 
-        HttpPost hg = new HttpPost("");//设置请求连接
+        HttpPost hg = new HttpPost("www.baidu.com");//设置请求连接
         List<NameValuePair> fromValue = new ArrayList<NameValuePair>(); //设置请求参数
         fromValue.add(new BasicNameValuePair("", ""));
 
@@ -76,24 +79,27 @@ public class test1 {
 
         }
     }
-
+    @Test
     public void getTest(){
 
         CloseableHttpClient aDefault = HttpClients.createDefault();
-        HttpGet hg  = new HttpGet("");
+        HttpGet hg  = new HttpGet("http://www.baidu.com");
         List<NameValuePair> nvp = new ArrayList<NameValuePair>();
-        nvp.add(new BasicNameValuePair("",""));
+        //nvp.add(new BasicNameValuePair("123","123"));
 
         try {
             CloseableHttpResponse execute = aDefault.execute(hg);
+            System.out.println(execute.getStatusLine().getStatusCode());
+            Assert.assertEquals(200,execute.getStatusLine().getStatusCode());
+            //Assert.assertTrue(false);
             execute.getStatusLine().getStatusCode();
             execute.getStatusLine().getProtocolVersion();//HTTP/1.1
             execute.getStatusLine().getReasonPhrase();//行
             HttpEntity entity = execute.getEntity();
-            EntityUtils.consume(entity);
-            String s = EntityUtils.toString(entity);
+ //           EntityUtils.consume(entity);
+/*            String s = EntityUtils.toString(entity);
             Document parse = Jsoup.parse(s);
-            Element elementById = parse.getElementById("");
+            Element elementById = parse.getElementById("");*/
 
         }catch (Exception e){
             e.printStackTrace();
